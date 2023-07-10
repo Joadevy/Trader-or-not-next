@@ -16,7 +16,7 @@ type Props = {
 
 type Result = "win" | "lose" | "draw";
 
-type TradeResult = {
+export type TradeResult = {
   initialPrice: number;
   finalPrice: number;
   selection: "higher" | "lower";
@@ -56,7 +56,7 @@ const Game = ({ backToHome }: Props) => {
       ) {
         setScore(score + 1);
         gameResult("win");
-        saveTradeResult();
+        saveTradeResult(initialPrice, newPrice, isHigher);
       } else if (newPrice === initialPrice) {
         gameResult("draw");
       } else {
@@ -68,11 +68,15 @@ const Game = ({ backToHome }: Props) => {
     }, 5000);
   };
 
-  const saveTradeResult = () => {
+  const saveTradeResult = (
+    initialPrice: number,
+    finalPrice: number,
+    isHigher: boolean,
+  ) => {
     const newTradeResult: TradeResult = {
-      initialPrice,
-      finalPrice: finalPrice!,
-      selection: optionChosen!,
+      initialPrice: initialPrice,
+      finalPrice: finalPrice,
+      selection: isHigher ? "higher" : "lower",
       ticker,
       date: new Date(),
     };
