@@ -17,7 +17,11 @@ const Countdown = ({ seconds }: Props) => {
     }
   }, [timeLeft]);
 
-  return <>{timeLeft}</>;
+  return (
+    <div className="h-10">
+      <p className="text-3xl">{timeLeft}</p>
+    </div>
+  );
 };
 
 export default Countdown;
