@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import HomeButton from "../Buttons/HomeButton";
 import BackButton from "../Buttons/BackButton";
+import BottomRightToast from "../Toast/BottomRightToast";
 
 import { CryptoTicker, getRandomCrypto } from "./gameHelpers";
 import Countdown from "./Countdown";
@@ -15,6 +16,14 @@ type Props = {
 
 type Result = "win" | "lose" | "draw";
 
+type TradeResult = {
+  initialPrice: number;
+  finalPrice: number;
+  selection: "higher" | "lower";
+  ticker: CryptoTicker;
+  date: Date;
+};
+
 const Game = ({ backToHome }: Props) => {
   const [isActiveRound, setIsActiveRound] = useState(false);
   const [score, setScore] = useState(0);
@@ -24,6 +33,7 @@ const Game = ({ backToHome }: Props) => {
   const [showResult, setShowResult] = useState(false);
   const [optionChosen, setOptionChosen] = useState<"higher" | "lower">();
   const [result, setResult] = useState<Result>();
+  const [tradesInARow, setTradesInARow] = useState<TradeResult[]>([]);
 
   useEffect(() => {
     getPrice(ticker.symbol).then((price) => setInitialPrice(price));
@@ -40,19 +50,49 @@ const Game = ({ backToHome }: Props) => {
 
       setFinalPrice(newPrice);
 
-      if (newPrice > initialPrice && isHigher) {
+      if (
+        (newPrice > initialPrice && isHigher) ||
+        (newPrice < initialPrice && !isHigher)
+      ) {
         setScore(score + 1);
         gameResult("win");
-      } else if (newPrice < initialPrice && !isHigher) {
-        setScore(score + 1);
-        gameResult("win");
+        saveTradeResult();
       } else if (newPrice === initialPrice) {
         gameResult("draw");
       } else {
         gameResult("lose");
+        setScore(0);
+        setTradesInARow([]);
       }
       setIsActiveRound(false);
     }, 5000);
+  };
+
+  const saveTradeResult = () => {
+    const newTradeResult: TradeResult = {
+      initialPrice,
+      finalPrice: finalPrice!,
+      selection: optionChosen!,
+      ticker,
+      date: new Date(),
+    };
+
+    const newTradesInARow = [...tradesInARow, newTradeResult];
+
+    if (newTradesInARow.length > 1 && !localStorage.getItem("tradesInARow")) {
+      localStorage.setItem("tradesInARow", JSON.stringify(newTradesInARow));
+    } else if (newTradesInARow.length > 1) {
+      const tradesInARow = JSON.parse(
+        localStorage.getItem("tradesInARow")!,
+      ) as TradeResult[];
+
+      localStorage.setItem(
+        "tradesInARow",
+        JSON.stringify([...tradesInARow, newTradeResult]),
+      );
+    }
+
+    setTradesInARow(newTradesInARow);
   };
 
   const gameResult = (result: Result) => {
@@ -90,12 +130,18 @@ const Game = ({ backToHome }: Props) => {
       <header className="mb-4">
         {showResult ? (
           <>
-            <h2>
-              {result === "win"
-                ? "You won!"
-                : result === "lose"
-                ? "You lost!"
-                : "Oops, price didn't change, It's a draw!"}
+            <h2 className="text-center">
+              {result === "win" ? (
+                <span className="text text-green-400 text-xl font-bold">
+                  You won!
+                </span>
+              ) : result === "lose" ? (
+                <span className="text text-red-400 text-xl font-bold">
+                  You lost :(
+                </span>
+              ) : (
+                "Oops, price didn't change, It's a draw!"
+              )}
             </h2>
             <h2>
               Cryptocurrency name:{" "}
@@ -157,6 +203,16 @@ const Game = ({ backToHome }: Props) => {
           />
         </div>
       )}
+
+      {score === 2 ? (
+        <BottomRightToast message="🏆: You got 2 predicts in a row and won the rookie trader trophy!" />
+      ) : score === 5 ? (
+        <BottomRightToast message="🏆: You got 5 predicts in a row and won the middle trader trophy!" />
+      ) : score === 7 ? (
+        <BottomRightToast message="🏆: You got 7 predicts in a row and won the senior trader trophy!" />
+      ) : score === 10 ? (
+        <BottomRightToast message="🏆: You got 10 predicts in a row and won the professional trader trophy!" />
+      ) : null}
     </main>
   );
 };

@@ -33,6 +33,7 @@ const HomeMenu = () => {
     <div className="text-dark-text flex flex-col gap-2 justify-center">
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
       <HomeButton handleClick={() => handleOpenFAQ()} text="FAQ" />
+      <HomeButton handleClick={() => handleOpenFAQ()} text="My trophies" />
     </div>
   );
 };
