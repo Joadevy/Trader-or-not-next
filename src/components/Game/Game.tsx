@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react";
+import type {
+  CryptoTicker,
+  TradeOptions,
+  TradeResult,
+  TypeResult,
+} from "./gameHelpers";
 
-import HomeButton from "../Buttons/HomeButton";
+import { useEffect, useRef, useState } from "react";
+
 import BackButton from "../Buttons/BackButton";
-import BottomRightToast from "../Toast/BottomRightToast";
 
-import { CryptoTicker, getRandomCrypto } from "./gameHelpers";
+import { getRandomCrypto } from "./gameHelpers";
 import Countdown from "./Countdown";
+// eslint-disable-next-line import/no-unresolved
+import PrizeToast from "./PrizeToast";
+// eslint-disable-next-line import/no-unresolved
+import Result from "./Result";
+// eslint-disable-next-line import/no-unresolved
+import HomeInfo from "./HomeInfo";
+// eslint-disable-next-line import/no-unresolved
+import ButtonsTradeOptions from "./ButtonsTradeOptions";
 
 // eslint-disable-next-line import/no-unresolved
 import { getPrice } from "@/utils/api/api";
@@ -14,25 +27,31 @@ type Props = {
   backToHome: () => void;
 };
 
-type Result = "win" | "lose" | "draw";
+const saveTradeStreakToLocalStorage = (newTradesInARow: TradeResult[]) => {
+  if (newTradesInARow.length > 1 && !localStorage.getItem("tradesInARow")) {
+    localStorage.setItem("tradesInARow", JSON.stringify(newTradesInARow));
+  } else if (newTradesInARow.length > 1) {
+    const tradesInARow = JSON.parse(
+      localStorage.getItem("tradesInARow")!,
+    ) as TradeResult[];
 
-export type TradeResult = {
-  initialPrice: number;
-  finalPrice: number;
-  selection: "higher" | "lower";
-  ticker: CryptoTicker;
-  date: Date;
+    localStorage.setItem(
+      "tradesInARow",
+      JSON.stringify(tradesInARow.concat(newTradesInARow)),
+    );
+  }
 };
 
 const Game = ({ backToHome }: Props) => {
+  const gameID = useRef(crypto.randomUUID());
   const [isActiveRound, setIsActiveRound] = useState(false);
   const [score, setScore] = useState(0);
   const [ticker, setTicker] = useState<CryptoTicker>(getRandomCrypto());
   const [initialPrice, setInitialPrice] = useState<null | number>(null);
   const [finalPrice, setFinalPrice] = useState<null | number>(null);
   const [showResult, setShowResult] = useState(false);
-  const [optionChosen, setOptionChosen] = useState<"higher" | "lower">();
-  const [result, setResult] = useState<Result>();
+  const [optionChosen, setOptionChosen] = useState<TradeOptions>();
+  const [result, setResult] = useState<TypeResult>();
   const [tradesInARow, setTradesInARow] = useState<TradeResult[]>([]);
 
   useEffect(() => {
@@ -79,27 +98,17 @@ const Game = ({ backToHome }: Props) => {
       selection: isHigher ? "higher" : "lower",
       ticker,
       date: new Date(),
+      gameId: gameID.current,
     };
 
     const newTradesInARow = [...tradesInARow, newTradeResult];
 
-    if (newTradesInARow.length > 1 && !localStorage.getItem("tradesInARow")) {
-      localStorage.setItem("tradesInARow", JSON.stringify(newTradesInARow));
-    } else if (newTradesInARow.length > 1) {
-      const tradesInARow = JSON.parse(
-        localStorage.getItem("tradesInARow")!,
-      ) as TradeResult[];
-
-      localStorage.setItem(
-        "tradesInARow",
-        JSON.stringify([...tradesInARow, newTradeResult]),
-      );
-    }
+    saveTradeStreakToLocalStorage(newTradesInARow);
 
     setTradesInARow(newTradesInARow);
   };
 
-  const gameResult = (result: Result) => {
+  const gameResult = (result: TypeResult) => {
     setShowResult(true);
     setResult(result);
   };
@@ -112,13 +121,8 @@ const Game = ({ backToHome }: Props) => {
       newTicker = getRandomCrypto();
     }
     setTicker(newTicker);
+    setInitialPrice(null);
   };
-
-  // const resetGame = () => {
-  //   setScore(0);
-  //   setShowResult(false);
-  //   setTicker(getRandomCrypto());
-  // };
 
   return (
     <main className="text-dark-text border border-dark-blue-100 p-4 rounded-lg w-[300px] lg:w-[450px] flex flex-col items-center">
@@ -134,89 +138,25 @@ const Game = ({ backToHome }: Props) => {
       <header className="mb-4">
         {showResult ? (
           <>
-            <h2 className="text-center">
-              {result === "win" ? (
-                <span className="text text-green-400 text-xl font-bold">
-                  You won!
-                </span>
-              ) : result === "lose" ? (
-                <span className="text text-red-400 text-xl font-bold">
-                  You lost :(
-                </span>
-              ) : (
-                "Oops, price didn't change, It's a draw!"
-              )}
-            </h2>
-            <h2>
-              Cryptocurrency name:{" "}
-              <span className=" text-dark-blue-300">
-                {ticker.name} ({ticker.shortName})
-              </span>
-            </h2>
-            <h3>
-              Initial Price:{" "}
-              <span className=" text-dark-blue-300">
-                {initialPrice.toFixed(2)}
-              </span>
-            </h3>
-            <h4>
-              Final Price:{" "}
-              <span className=" text-dark-blue-300">
-                {finalPrice!.toFixed(2)}
-              </span>
-            </h4>
-            <p>
-              & you selected{" "}
-              <span className="text-dark-blue-300">{optionChosen} price</span>
-            </p>
-
-            <div className="text-center mt-2">
-              <HomeButton
-                handleClick={() => playAnotherRound()}
-                text="Play again"
-              />
-            </div>
+            <Result
+              finalPrice={finalPrice!}
+              handlePlayAgain={playAnotherRound}
+              initialPrice={initialPrice}
+              optionChosen={optionChosen!}
+              result={result!}
+              ticker={ticker}
+            />
           </>
         ) : (
-          <>
-            <h2>
-              Cryptocurrency name:{" "}
-              <span className=" text-dark-blue-300">
-                {ticker.name} ({ticker.shortName})
-              </span>
-            </h2>
-            <h3>
-              Actual Price:{" "}
-              <span className=" text-dark-blue-300">
-                {initialPrice.toFixed(2)}
-              </span>
-            </h3>
-          </>
+          <HomeInfo initialPrice={initialPrice} ticker={ticker} />
         )}
       </header>
       {isActiveRound && <Countdown seconds={5} />}
       {!isActiveRound && !showResult && (
-        <div className="flex gap-2 h-10">
-          <HomeButton
-            handleClick={() => higherPriceSelected(true)}
-            text="Higher price"
-          />
-          <HomeButton
-            handleClick={() => higherPriceSelected(false)}
-            text="Lower price"
-          />
-        </div>
+        <ButtonsTradeOptions higherPriceSelected={higherPriceSelected} />
       )}
 
-      {score === 2 ? (
-        <BottomRightToast message="🏆: You got 2 predicts in a row and won the rookie trader trophy!" />
-      ) : score === 5 ? (
-        <BottomRightToast message="🏆: You got 5 predicts in a row and won the middle trader trophy!" />
-      ) : score === 7 ? (
-        <BottomRightToast message="🏆: You got 7 predicts in a row and won the senior trader trophy!" />
-      ) : score === 10 ? (
-        <BottomRightToast message="🏆: You got 10 predicts in a row and won the professional trader trophy!" />
-      ) : null}
+      <PrizeToast score={score} />
     </main>
   );
 };

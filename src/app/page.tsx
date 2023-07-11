@@ -9,7 +9,8 @@ export default function Home() {
           You are a pro trader! Aren&apos;t you?
         </h1>
         <p>
-          » Try to find out the price of the cryptocurrency within 5 seconds
+          » Try to find out if the price of the cryptocurrency will rise or fall
+          within 5 seconds.
         </p>
       </header>
 
