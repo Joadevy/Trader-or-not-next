@@ -1,7 +1,6 @@
 import type { CryptoTicker } from "@/components/Game/gameHelpers";
 
 import CryptoButton from "../Buttons/CryptoButton";
-import HomeButton from "../Buttons/HomeButton";
 
 type Props = {
   higherPriceSelected: (_: boolean) => void;

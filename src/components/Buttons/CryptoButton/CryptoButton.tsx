@@ -1,6 +1,6 @@
 import type { CryptoTicker } from "@/components/Game/gameHelpers";
 
-import { CryptoSVG } from "./svgCrypto";
+import { CryptoSVG } from "./CryptoSVG";
 
 type Props = {
   text: string;
