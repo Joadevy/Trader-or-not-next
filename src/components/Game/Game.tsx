@@ -138,7 +138,10 @@ const Game = ({ backToHome }: Props) => {
       </header>
       {isActiveRound && <Countdown seconds={5} />}
       {!isActiveRound && !showResult && (
-        <ButtonsTradeOptions higherPriceSelected={higherPriceSelected} />
+        <ButtonsTradeOptions
+          higherPriceSelected={higherPriceSelected}
+          shortNameTicker={ticker.shortName}
+        />
       )}
 
       <PrizeToast score={score} />
