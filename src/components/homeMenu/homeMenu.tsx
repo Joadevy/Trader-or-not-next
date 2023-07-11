@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import Game from "../Game";
 import HomeButton from "../Buttons/HomeButton";
+import LinkButton from "../Buttons/LinkButton";
 
 const HomeMenu = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -42,7 +43,7 @@ const HomeMenu = () => {
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
       <HomeButton handleClick={() => handleOpenFAQ()} text="FAQ" />
       {/* <HomeButton handleClick={() => handleOpenHistory()} text="History" /> */}
-      <Link href={"/history"}>History</Link>
+      <LinkButton linkTO={"/history"} text="History" />
       <HomeButton handleClick={() => handleOpenFAQ()} text="My trophies" />
     </div>
   );
