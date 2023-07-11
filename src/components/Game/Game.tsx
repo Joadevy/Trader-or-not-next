@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 
 import BackButton from "../Buttons/BackButton";
 
-import { getRandomCrypto } from "./gameHelpers";
+import { getRandomCrypto, saveTradeStreakToLocalStorage } from "./gameHelpers";
 import Countdown from "./Countdown";
 // eslint-disable-next-line import/no-unresolved
 import PrizeToast from "./PrizeToast";
@@ -25,21 +25,6 @@ import { getPrice } from "@/utils/api/api";
 
 type Props = {
   backToHome: () => void;
-};
-
-const saveTradeStreakToLocalStorage = (newTradesInARow: TradeResult[]) => {
-  if (newTradesInARow.length > 1 && !localStorage.getItem("tradesInARow")) {
-    localStorage.setItem("tradesInARow", JSON.stringify(newTradesInARow));
-  } else if (newTradesInARow.length > 1) {
-    const tradesInARow = JSON.parse(
-      localStorage.getItem("tradesInARow")!,
-    ) as TradeResult[];
-
-    localStorage.setItem(
-      "tradesInARow",
-      JSON.stringify(tradesInARow.concat(newTradesInARow)),
-    );
-  }
 };
 
 const Game = ({ backToHome }: Props) => {

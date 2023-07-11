@@ -30,3 +30,20 @@ export const getRandomCrypto = () => {
 
   return tickers[randomIndex];
 };
+
+export const saveTradeStreakToLocalStorage = (
+  newTradesInARow: TradeResult[],
+) => {
+  if (newTradesInARow.length > 1 && !localStorage.getItem("tradesInARow")) {
+    localStorage.setItem("tradesInARow", JSON.stringify(newTradesInARow));
+  } else if (newTradesInARow.length > 1) {
+    const tradesInARow = JSON.parse(
+      localStorage.getItem("tradesInARow")!,
+    ) as TradeResult[];
+
+    localStorage.setItem(
+      "tradesInARow",
+      JSON.stringify(tradesInARow.concat(newTradesInARow)),
+    );
+  }
+};
