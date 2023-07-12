@@ -17,6 +17,8 @@ export type TradeResult = {
   gameId: string; // Para luego separar las rachas de trades por juego
 };
 
+export type StreakTradeResult = TradeResult & { streakId: string };
+
 const tickers: CryptoTicker[] = [
   { symbol: "BTCUSDT", name: "Bitcoin", shortName: "BTC" },
   { symbol: "ETHUSDT", name: "Ethereum", shortName: "ETH" },
@@ -34,9 +36,9 @@ export const getRandomCrypto = () => {
 export const saveTradeStreakToLocalStorage = (
   newTradesInARow: TradeResult[],
 ) => {
-  if (newTradesInARow.length > 1 && !localStorage.getItem("tradesInARow")) {
+  if (!localStorage.getItem("tradesInARow")) {
     localStorage.setItem("tradesInARow", JSON.stringify(newTradesInARow));
-  } else if (newTradesInARow.length > 1) {
+  } else {
     const tradesInARow = JSON.parse(
       localStorage.getItem("tradesInARow")!,
     ) as TradeResult[];

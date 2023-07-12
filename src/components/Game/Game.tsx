@@ -1,5 +1,6 @@
 import type {
   CryptoTicker,
+  StreakTradeResult,
   TradeOptions,
   TradeResult,
   TypeResult,
@@ -29,6 +30,7 @@ type Props = {
 
 const Game = ({ backToHome }: Props) => {
   const gameID = useRef(crypto.randomUUID());
+  const streakID = useRef(crypto.randomUUID());
   const [isActiveRound, setIsActiveRound] = useState(false);
   const [score, setScore] = useState(0);
   const [ticker, setTicker] = useState<CryptoTicker>(getRandomCrypto());
@@ -67,6 +69,10 @@ const Game = ({ backToHome }: Props) => {
         gameResult("lose");
         setScore(0);
         setTradesInARow([]);
+        if (tradesInARow.length > 1) {
+          streakID.current = crypto.randomUUID();
+          saveTradeStreakToLocalStorage(tradesInARow);
+        }
       }
       setIsActiveRound(false);
     }, 5000);
@@ -77,18 +83,17 @@ const Game = ({ backToHome }: Props) => {
     finalPrice: number,
     isHigher: boolean,
   ) => {
-    const newTradeResult: TradeResult = {
+    const newTradeResult: StreakTradeResult = {
       initialPrice: initialPrice,
       finalPrice: finalPrice,
       selection: isHigher ? "higher" : "lower",
       ticker,
       date: new Date(),
       gameId: gameID.current,
+      streakId: streakID.current,
     };
 
     const newTradesInARow = [...tradesInARow, newTradeResult];
-
-    saveTradeStreakToLocalStorage(newTradesInARow);
 
     setTradesInARow(newTradesInARow);
   };
@@ -107,6 +112,14 @@ const Game = ({ backToHome }: Props) => {
     }
     setTicker(newTicker);
     setInitialPrice(null);
+    setResult(undefined);
+  };
+
+  const handleBackToHome = () => {
+    if (tradesInARow.length > 1) {
+      saveTradeStreakToLocalStorage(tradesInARow);
+    }
+    backToHome();
   };
 
   return (
@@ -115,7 +128,7 @@ const Game = ({ backToHome }: Props) => {
         <div>
           <BackButton
             description="Back to home"
-            handleClick={() => backToHome()}
+            handleClick={() => handleBackToHome()}
           />
         </div>
         <div className="font-bold">Score: {score}</div>
