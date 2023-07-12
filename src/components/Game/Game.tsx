@@ -144,7 +144,7 @@ const Game = ({ backToHome }: Props) => {
         />
       )}
 
-      <PrizeToast score={score} />
+      <PrizeToast isAwin={result!} score={score} />
     </main>
   );
 };

@@ -1,10 +1,15 @@
 import BottomRightToast from "../Toast/BottomRightToast";
 
+import { TypeResult } from "./gameHelpers";
+
 type Props = {
   score: number;
+  isAwin: TypeResult;
 };
 
-const PrizeToast = ({ score }: Props) => {
+const PrizeToast = ({ score, isAwin }: Props) => {
+  if (isAwin !== "win") return null;
+
   return (
     <>
       {score === 2 ? (
