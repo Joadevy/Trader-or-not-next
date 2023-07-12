@@ -10,7 +10,6 @@ import LinkButton from "../Buttons/LinkButton";
 const HomeMenu = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [openFAQ, setOpenFAQ] = useState(false);
-  const [openHistory, setOpenHistory] = useState(false);
 
   const handleStartPlay = () => {
     setIsPlaying(true);
@@ -28,12 +27,6 @@ const HomeMenu = () => {
     setOpenFAQ(false);
   };
 
-  const handleOpenHistory = () => {};
-
-  const handleCloseHistory = () => {
-    setOpenHistory(false);
-  };
-
   if (isPlaying) return <Game backToHome={() => backToHomeFromGame()} />;
 
   // if (openFAQ) return <FAQ />;
@@ -41,10 +34,9 @@ const HomeMenu = () => {
   return (
     <div className="text-dark-text flex flex-col gap-2 justify-center">
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
-      <HomeButton handleClick={() => handleOpenFAQ()} text="FAQ" />
-      {/* <HomeButton handleClick={() => handleOpenHistory()} text="History" /> */}
-      <LinkButton linkTO={"/history"} text="History" />
       <HomeButton handleClick={() => handleOpenFAQ()} text="My trophies" />
+      <LinkButton linkTO={"/history"} text="Strake History" />
+      <HomeButton handleClick={() => handleOpenFAQ()} text="FAQ" />
     </div>
   );
 };
