@@ -1,0 +1,38 @@
+[
+  {
+    "score": 1,
+    "name": "Rookie Trader Trophy",
+    "description": "Obtained for completing the game",
+    "date": "2017-01-01T00:00:00.000Z"
+  },
+  {
+    "score": 2,
+    "name": "Beginner Trader Trophy",
+    "description": "Obtained for completing the game",
+    "date": "2017-01-01T00:00:00.000Z"
+  },
+  {
+    "score": 5,
+    "name": "Advanced Trader Trophy",
+    "description": "Obtained for completing the game",
+    "date": "2017-01-01T00:00:00.000Z"
+  },
+  {
+    "score": 7,
+    "name": "Specialist Trader Trophy",
+    "description": "Obtained for completing the game",
+    "date": "2017-01-01T00:00:00.000Z"
+  },
+  {
+    "score": 10,
+    "name": "Professional Trader Trophy",
+    "description": "Obtained for completing the game",
+    "date": "2017-01-01T00:00:00.000Z"
+  },
+  {
+    "score": 12,
+    "name": "Master Trader Trophy",
+    "description": "Obtained for completing the game",
+    "date": "2017-01-01T00:00:00.000Z"
+  }
+]
