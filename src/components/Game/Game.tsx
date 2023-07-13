@@ -153,7 +153,7 @@ const Game = ({ backToHome }: Props) => {
         />
       )}
 
-      <Trophies isAwin={"win"} score={2} />
+      <Trophies isAwin={result!} score={score} />
     </main>
   );
 };
