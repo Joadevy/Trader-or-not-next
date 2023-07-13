@@ -16,8 +16,6 @@ type Trophy = {
   date: Date;
 };
 
-// const scoreTrophyMap: Map<Trophy['score'],Trophy[]> = new Map([]);
-
 const addDateToTrophy = (trophy: Trophy) => {
   trophy.date = new Date(Date.now());
 
@@ -25,6 +23,7 @@ const addDateToTrophy = (trophy: Trophy) => {
 };
 
 const addTrophyToLocalStorage = (trophies: Trophy[], trophy: Trophy) => {
+  if (!trophy) return;
   trophy = addDateToTrophy(trophy);
   localStorage.setItem("trophies", JSON.stringify([...trophies, trophy]));
 };
