@@ -34,8 +34,9 @@ const HomeMenu = () => {
   return (
     <div className="text-dark-text flex flex-col gap-2 justify-center">
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
-      <HomeButton handleClick={() => handleOpenFAQ()} text="My trophies" />
+      <LinkButton linkTO={"/trophies"} text="My trophies" />
       <LinkButton linkTO={"/history"} text="Strake History" />
+      <HomeButton handleClick={() => {}} text="Statistics" />
       <HomeButton handleClick={() => handleOpenFAQ()} text="FAQ" />
     </div>
   );
