@@ -12,14 +12,10 @@ import BackButton from "../Buttons/BackButton";
 
 import { getRandomCrypto, saveTradeStreakToLocalStorage } from "./gameHelpers";
 import Countdown from "./Countdown";
-// eslint-disable-next-line import/no-unresolved
-import PrizeToast from "./PrizeToast";
-// eslint-disable-next-line import/no-unresolved
 import Result from "./Result";
-// eslint-disable-next-line import/no-unresolved
 import HomeInfo from "./HomeInfo";
-// eslint-disable-next-line import/no-unresolved
 import ButtonsTradeOptions from "./ButtonsTradeOptions";
+import Trophies from "./Trophies/Trophies";
 
 // eslint-disable-next-line import/no-unresolved
 import { getPrice } from "@/utils/api/api";
@@ -157,7 +153,7 @@ const Game = ({ backToHome }: Props) => {
         />
       )}
 
-      <PrizeToast isAwin={result!} score={score} />
+      <Trophies isAwin={"win"} score={2} />
     </main>
   );
 };
