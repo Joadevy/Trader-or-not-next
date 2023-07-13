@@ -9,7 +9,7 @@ type Props = {
   isAwin: TypeResult;
 };
 
-type Trophy = {
+export type Trophy = {
   score: number;
   name: string;
   description: string;
