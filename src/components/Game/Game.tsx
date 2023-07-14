@@ -16,6 +16,7 @@ import Result from "./Result";
 import HomeInfo from "./HomeInfo";
 import ButtonsTradeOptions from "./ButtonsTradeOptions";
 import Trophies from "./Trophies/Trophies";
+import Chart from "./Chart";
 
 // eslint-disable-next-line import/no-unresolved
 import { getPrice } from "@/utils/api/api";
@@ -142,7 +143,12 @@ const Game = ({ backToHome }: Props) => {
             />
           </>
         ) : (
-          <HomeInfo initialPrice={initialPrice} ticker={ticker} />
+          <>
+            <HomeInfo initialPrice={initialPrice} ticker={ticker} />
+            <div className=" rounded-lg border border-dark-blue overflow-hidden mt-2">
+              <Chart ticker={ticker} />
+            </div>
+          </>
         )}
       </header>
       {isActiveRound && <Countdown seconds={5} />}
