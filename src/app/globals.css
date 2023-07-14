@@ -1,4 +1,41 @@
 @tailwind base;
+
+html {
+  scrollbar-face-color: #10141e;
+  scrollbar-base-color: #10141e;
+  scrollbar-3dlight-color: #10141e;
+  scrollbar-highlight-color: #10141e;
+  scrollbar-track-color: #1a202c;
+  scrollbar-arrow-color: #1a202c;
+  scrollbar-shadow-color: #10141e;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  background-color: #10141e;
+}
+::-webkit-scrollbar-track {
+  background-color: #10141e;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #1a202c;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #10141e;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #10141e;
+}
+::-webkit-resizer {
+  background-color: #10141e;
+}
+
 @tailwind components;
 @tailwind utilities;
 
