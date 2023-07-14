@@ -1,7 +1,14 @@
 "use client";
 import type { Trophy as TypeTrophy } from "@/components/Game/Trophies/Trophies";
 
-import Trophy from "./Trophy";
+import dynamic from "next/dynamic";
+
+import LoaderTrophy from "./LoaderTrophy";
+
+const Trophy = dynamic(() => import("./Trophy"), {
+  ssr: false,
+  loading: () => <LoaderTrophy />,
+});
 
 const checkTrophyWon = (score: number, trophies: TypeTrophy[]) => {
   if (trophies.length === 0) return false;
@@ -19,10 +26,11 @@ const page = () => {
   }
 
   return (
-    <main className="text-dark-text p-4">
-      <h1 className=" text-dark-title text-2xl">My trophies</h1>
-
-      <article className="flex flex-wrap gap-4 mt-4">
+    <main className="text-dark-text relative">
+      <header className="mt-4 text-center">
+        <h1 className="text-dark-title text-2xl">My trophies</h1>
+      </header>
+      <article className="flex flex-wrap gap-4 mt-4 items-center justify-center">
         <Trophy
           date={checkTrophyWon(1, trophies) ? trophies[0].date : undefined}
           description="Obtain 1 successful trade to unlock."
