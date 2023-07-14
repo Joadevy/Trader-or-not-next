@@ -53,11 +53,11 @@ const page = () => {
       <h1 className=" text-dark-title text-2xl mb-2">
         Successful streak of trades
       </h1>
-      <div className=" text-dark-text flex gap-6 flex-wrap">
+      <div className=" text-dark-text flex gap-6 flex-wrap items-center ">
         {Array.from(streaksPerGame.keys()).map((gameID, index) => (
           <div
             key={gameID}
-            className="border border-dark-blue-100 p-2 rounded-md"
+            className="border border-dark-blue-100 bg-dark-blue p-2 rounded-md"
           >
             <h2 className="font-bold">Game {index + 1}</h2>
             <div className="flex gap-4">
@@ -69,7 +69,7 @@ const page = () => {
                       {strake.map((trade, index) => (
                         <div
                           key={index}
-                          className="border border-dark-blue-200 p-2 rounded-md bg-dark-blue-100"
+                          className="border border-dark-blue-100 p-2 rounded-md bg-dark-blue"
                         >
                           <p>Crypto: {trade.ticker.name}</p>
                           <p>Initial price: {trade.initialPrice}</p>
