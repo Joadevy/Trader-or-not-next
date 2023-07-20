@@ -1,4 +1,4 @@
-import { createChart, ColorType } from "lightweight-charts";
+import { createChart, ColorType, Time } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
 
 import { CryptoTicker } from "./gameHelpers";
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export type Data = {
-  time: string;
+  time: Time;
   value: number;
 };
 
@@ -53,6 +53,11 @@ export const ChartComponent = (props: Props) => {
       },
       width: chartContainerRef.current.clientWidth,
       height: 300,
+      timeScale: {
+        visible: true,
+        timeVisible: true,
+        secondsVisible: true,
+      },
     });
 
     chart.timeScale().fitContent();
@@ -84,30 +89,16 @@ export const ChartComponent = (props: Props) => {
   return <div ref={chartContainerRef} />;
 };
 
-const initialData = [
-  { time: "2018-12-22", value: 32.51 },
-  { time: "2018-12-23", value: 31.11 },
-  { time: "2018-12-24", value: 27.02 },
-  { time: "2018-12-25", value: 27.32 },
-  { time: "2018-12-26", value: 25.17 },
-  { time: "2018-12-27", value: 28.89 },
-  { time: "2018-12-28", value: 25.46 },
-  { time: "2018-12-29", value: 23.92 },
-  { time: "2018-12-30", value: 22.68 },
-  { time: "2018-12-31", value: 22.67 },
-];
-
 function Chart({ ticker }: ChartProps) {
   const [data, setData] = React.useState<Data[]>([]);
 
   React.useEffect(() => {
-    getHistoricalPrices(ticker.symbol, "1m", 10).then((data) => setData(data));
+    getHistoricalPrices(ticker.symbol, "1m", 20).then((data) => setData(data));
   }, [ticker]);
 
   if (!data) return <div>Loading...</div>;
 
-  // aca hay que hacer el fetch para buscar la data de la api y pasarle time-value
-  return <ChartComponent data={initialData} ticker={ticker} />;
+  return <ChartComponent data={data} ticker={ticker} />;
 }
 
 export default Chart;
