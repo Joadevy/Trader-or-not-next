@@ -42,9 +42,15 @@ const splitStreakForGameID = (trades: StreakTradeResult[]) => {
 };
 
 const page = () => {
-  const historyTrades = localStorage.getItem("tradesInARow")
-    ? (JSON.parse(localStorage.getItem("tradesInARow")!) as StreakTradeResult[])
-    : [];
+  let historyTrades: StreakTradeResult[] = [];
+
+  if (typeof window !== "undefined") {
+    historyTrades = localStorage.getItem("tradesInARow")
+      ? (JSON.parse(
+          localStorage.getItem("tradesInARow")!,
+        ) as StreakTradeResult[])
+      : [];
+  }
 
   const streaksPerGame = splitStreakForGameID(historyTrades);
 
