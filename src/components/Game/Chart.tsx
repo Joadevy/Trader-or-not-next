@@ -3,6 +3,9 @@ import React, { useEffect, useRef } from "react";
 
 import { CryptoTicker } from "./gameHelpers";
 
+// eslint-disable-next-line import/no-unresolved
+import { getHistoricalPrices } from "@/utils/api/api";
+
 type Props = {
   ticker: CryptoTicker;
   data: Data[];
@@ -15,7 +18,7 @@ type Props = {
   };
 };
 
-type Data = {
+export type Data = {
   time: string;
   value: number;
 };
@@ -95,6 +98,14 @@ const initialData = [
 ];
 
 function Chart({ ticker }: ChartProps) {
+  const [data, setData] = React.useState<Data[]>([]);
+
+  React.useEffect(() => {
+    getHistoricalPrices(ticker.symbol, "1m", 10).then((data) => setData(data));
+  }, [ticker]);
+
+  if (!data) return <div>Loading...</div>;
+
   // aca hay que hacer el fetch para buscar la data de la api y pasarle time-value
   return <ChartComponent data={initialData} ticker={ticker} />;
 }
