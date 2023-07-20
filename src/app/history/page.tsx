@@ -57,7 +57,7 @@ const page = () => {
         {Array.from(streaksPerGame.keys()).map((gameID, index) => (
           <div
             key={gameID}
-            className="border border-dark-blue-100 bg-dark-blue p-2 rounded-md"
+            className="p-2 border border-dark-blue rounded-md shadow-[0_0_15px_#0B2447]"
           >
             <h2 className="font-bold">Game {index + 1}</h2>
             <div className="flex gap-4">
