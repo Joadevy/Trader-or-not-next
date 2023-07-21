@@ -18,9 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={ysabeau.className + " bg-dark-bg min-h-screen"}>
-        {children}
-      </body>
+      <body className={ysabeau.className + " bg-dark-bg"}>{children}</body>
     </html>
   );
 }
