@@ -120,7 +120,7 @@ const Game = ({ backToHome }: Props) => {
   };
 
   return (
-    <main className="text-dark-text border border-dark-blue-100 p-4 rounded-lg w-[300px] lg:w-[450px] flex flex-col items-center">
+    <main className="text-dark-text border border-dark-blue-100 p-4 rounded-lg w-[300px] h-[500px] lg:w-[450px] flex flex-col items-center">
       <div className="flex justify-between w-full">
         <div>
           <BackButton
@@ -130,18 +130,23 @@ const Game = ({ backToHome }: Props) => {
         </div>
         <div className="font-bold">Score: {score}</div>
       </div>
-      <header className="mb-4">
+      <header
+        className={
+          "mb-4 " +
+          (showResult
+            ? "w-full h-full flex flex-col justify-center text-center"
+            : "")
+        }
+      >
         {showResult ? (
-          <>
-            <Result
-              finalPrice={finalPrice!}
-              handlePlayAgain={playAnotherRound}
-              initialPrice={initialPrice}
-              optionChosen={optionChosen!}
-              result={result!}
-              ticker={ticker}
-            />
-          </>
+          <Result
+            finalPrice={finalPrice!}
+            handlePlayAgain={playAnotherRound}
+            initialPrice={initialPrice}
+            optionChosen={optionChosen!}
+            result={result!}
+            ticker={ticker}
+          />
         ) : (
           <>
             <HomeInfo initialPrice={initialPrice} ticker={ticker} />

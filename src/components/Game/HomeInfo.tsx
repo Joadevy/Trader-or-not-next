@@ -8,7 +8,7 @@ type Props = {
 const HomeInfo = ({ ticker, initialPrice }: Props) => {
   return (
     <>
-      <h2>
+      <h2 className="mt-3">
         Cryptocurrency name:{" "}
         <span className=" text-dark-blue-300">
           {ticker.name} ({ticker.shortName})
