@@ -17,6 +17,7 @@ import HomeInfo from "./HomeInfo";
 import ButtonsTradeOptions from "./ButtonsTradeOptions";
 import Trophies from "./Trophies/Trophies";
 import Chart from "./Chart";
+import GameLoader from "./GameLoader";
 
 // eslint-disable-next-line import/no-unresolved
 import { getPrice } from "@/utils/api/api";
@@ -43,7 +44,8 @@ const Game = ({ backToHome }: Props) => {
   }, [ticker]);
 
   if (!initialPrice)
-    return <div className="text-dark-blue-200">Loading...</div>;
+    return <GameLoader handleBackToHome={backToHome} score={score} />;
+  // return <div className="text-dark-blue-200">Loading...</div>;
 
   const higherPriceSelected = async (isHigher: boolean) => {
     setIsActiveRound(true);
