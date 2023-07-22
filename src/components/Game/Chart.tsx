@@ -52,7 +52,7 @@ export const ChartComponent = (props: Props) => {
         textColor,
       },
       width: chartContainerRef.current.clientWidth,
-      height: 300,
+      height: 350,
       timeScale: {
         visible: true,
         timeVisible: true,

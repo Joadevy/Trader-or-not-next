@@ -120,7 +120,7 @@ const Game = ({ backToHome }: Props) => {
   };
 
   return (
-    <main className="text-dark-text border border-dark-blue-100 p-4 rounded-lg w-[300px] h-[500px] lg:w-[450px] flex flex-col items-center">
+    <div className="text-dark-text border border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center">
       <div className="flex justify-between w-full">
         <div>
           <BackButton
@@ -132,7 +132,7 @@ const Game = ({ backToHome }: Props) => {
       </div>
       <header
         className={
-          "mb-4 " +
+          "mb-4 w-full " +
           (showResult
             ? "w-full h-full flex flex-col justify-center text-center"
             : "")
@@ -150,7 +150,7 @@ const Game = ({ backToHome }: Props) => {
         ) : (
           <>
             <HomeInfo initialPrice={initialPrice} ticker={ticker} />
-            <div className=" rounded-lg border border-dark-blue overflow-hidden mt-2">
+            <div className=" rounded-lg border border-dark-blue overflow-hidden mt-2 w-full">
               <Chart ticker={ticker} />
             </div>
           </>
@@ -165,7 +165,7 @@ const Game = ({ backToHome }: Props) => {
       )}
 
       <Trophies isAwin={result!} score={score} />
-    </main>
+    </div>
   );
 };
 
