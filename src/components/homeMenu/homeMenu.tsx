@@ -20,7 +20,7 @@ const HomeMenu = () => {
   if (isPlaying) return <Game backToHome={() => backToHomeFromGame()} />;
 
   return (
-    <div className="text-dark-text flex flex-col gap-2 justify-center">
+    <div className="text-dark-text flex flex-col gap-3 lg:gap-2 justify-center">
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
       <LinkButton linkTO={"/trophies"} text="My trophies" />
       <LinkButton linkTO={"/history"} text="Strake History" />
