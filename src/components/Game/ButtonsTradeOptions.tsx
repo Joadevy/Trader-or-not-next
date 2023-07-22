@@ -12,7 +12,7 @@ const ButtonsTradeOptions = ({
   shortNameTicker,
 }: Props) => {
   return (
-    <div className="flex gap-2 h-10">
+    <div className="flex gap-2 h-10" id="buttonsHigherLower">
       <CryptoButton
         handleClick={() => higherPriceSelected(true)}
         isHigher={true}
