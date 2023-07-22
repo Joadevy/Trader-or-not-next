@@ -96,7 +96,12 @@ function Chart({ ticker }: ChartProps) {
     getHistoricalPrices(ticker.symbol, "1m", 20).then((data) => setData(data));
   }, [ticker]);
 
-  if (!data) return <div>Loading...</div>;
+  if (!data)
+    return (
+      <div className=" rounded-lg border border-slate-600 overflow-hidden mt-2 w-full h-[350px] flex items-center justify-center">
+        <p className="text-slate-600 animate-spin text-3xl">↻</p>
+      </div>
+    );
 
   return <ChartComponent data={data} ticker={ticker} />;
 }
