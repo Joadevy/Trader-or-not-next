@@ -26,7 +26,7 @@ const page = () => {
   }
 
   return (
-    <main className="text-dark-text relative">
+    <main className="text-dark-text relative pt-2 pb-6 px-4">
       <header className="mt-4 text-center">
         <h1 className="text-dark-title text-2xl">My trophies</h1>
       </header>
