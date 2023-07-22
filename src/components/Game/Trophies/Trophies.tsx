@@ -37,6 +37,7 @@ const getTrophy = (score: number) => {
 
   return trophy;
 };
+// FIXEAR PORQUE ESTA DEVOLVIENDO EL TOAST CUANDO YA GANASTE EL TROFEO ANTERIORMENTE, ME PASO CON EL DE 2 WINS.
 
 const Trophies = ({ score, isAwin }: Props) => {
   if (isAwin !== "win" || score < 1) return null;
@@ -52,7 +53,7 @@ const Trophies = ({ score, isAwin }: Props) => {
   } else {
     const lastTrophyGained = trophies[trophies.length - 1];
 
-    if (lastTrophyGained.score === score) return null;
+    if (lastTrophyGained.score >= score) return null;
 
     getTrophy(score).then((newTrophy) => {
       addTrophyToLocalStorage(trophies, newTrophy);
