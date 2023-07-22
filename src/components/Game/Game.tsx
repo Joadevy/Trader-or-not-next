@@ -45,7 +45,6 @@ const Game = ({ backToHome }: Props) => {
 
   if (!initialPrice)
     return <GameLoader handleBackToHome={backToHome} score={score} />;
-  // return <div className="text-dark-blue-200">Loading...</div>;
 
   const higherPriceSelected = async (isHigher: boolean) => {
     setIsActiveRound(true);
