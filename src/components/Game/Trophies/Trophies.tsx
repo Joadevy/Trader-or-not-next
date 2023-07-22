@@ -37,7 +37,6 @@ const getTrophy = (score: number) => {
 
   return trophy;
 };
-// FIXEAR PORQUE ESTA DEVOLVIENDO EL TOAST CUANDO YA GANASTE EL TROFEO ANTERIORMENTE, ME PASO CON EL DE 2 WINS.
 
 const Trophies = ({ score, isAwin }: Props) => {
   if (isAwin !== "win" || score < 1) return null;
