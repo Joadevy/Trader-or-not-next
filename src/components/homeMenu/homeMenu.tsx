@@ -50,7 +50,7 @@ const HomeMenu = () => {
       <LinkButton linkTO={"/trophies"} text="My trophies" />
       <LinkButton linkTO={"/history"} text="Strake History" />
       <HomeButton handleClick={() => {}} text="Statistics" />
-      <HomeButton handleClick={() => {}} text="FAQ" />
+      <LinkButton linkTO={"/faq"} text="FAQ" />
     </div>
   );
 };
