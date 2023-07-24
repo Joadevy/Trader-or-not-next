@@ -68,11 +68,11 @@ const page = () => {
             <h2 className="font-bold">Game {index + 1}</h2>
             <div className="flex flex-col gap-4 lg:flex-row">
               {Array.from(streaksPerGame.get(gameID)!.values()).map(
-                (strake, index) => (
+                (streak, index) => (
                   <div key={index} className="flex flex-col">
-                    <h3 className="text-sm">Streak {index + 1}</h3>
+                    <h3 className="text-sm mb-1">Streak {index + 1}</h3>
                     <div className="flex gap-2 flex-wrap lg:gap-1">
-                      {strake.map((trade, index) => (
+                      {streak.map((trade, index) => (
                         <div
                           key={index}
                           className="border border-dark-blue-100 p-2 rounded-md bg-dark-blue w-[150px] lg:w-fit"
