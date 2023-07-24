@@ -7,7 +7,7 @@ type Props = {
 
 const GameLoader = ({ score, handleBackToHome }: Props) => {
   return (
-    <div className="text-dark-text border bg-dark-bg border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center ">
+    <div className="animate-fade-in text-dark-text border bg-dark-bg border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center ">
       <div className="flex justify-between w-full">
         <div>
           <BackButton

@@ -9,6 +9,7 @@ import LinkButton from "../Buttons/LinkButton";
 const HomeMenu = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [scrollToSection, setScrollToSection] = useState(false);
+  const [animation, setAnimation] = useState(false);
 
   useEffect(() => {
     const handleScrollToSection = () => {
@@ -36,6 +37,7 @@ const HomeMenu = () => {
   const handleStartPlay = () => {
     setIsPlaying(true);
     setScrollToSection(true);
+    setAnimation(true);
   };
 
   const backToHomeFromGame = () => {
@@ -45,7 +47,12 @@ const HomeMenu = () => {
   if (isPlaying) return <Game backToHome={() => backToHomeFromGame()} />;
 
   return (
-    <div className="text-dark-text flex flex-col gap-3 lg:gap-2 justify-center">
+    <div
+      className={
+        "text-dark-text flex flex-col gap-3 lg:gap-2 justify-center py-2 px-4 bg-dark-bg border border-dark-bg bg-opacity-75 " +
+        (animation ? "animate-slide-in-right" : "animate-fade-in")
+      }
+    >
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
       <LinkButton linkTO={"/trophies"} text="My trophies" />
       <LinkButton linkTO={"/history"} text="Strake History" />

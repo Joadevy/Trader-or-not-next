@@ -121,7 +121,7 @@ const Game = ({ backToHome }: Props) => {
   };
 
   return (
-    <div className="text-dark-text bg-dark-bg relative z-10 border border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center">
+    <div className=" text-dark-text bg-dark-bg relative z-10 border border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center">
       <div className="flex justify-between w-full">
         <div>
           <BackButton
