@@ -6,8 +6,8 @@ import { Ysabeau } from "next/font/google";
 const ysabeau = Ysabeau({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Trader or not?",
-  description: "Higher and lower app with crypto's prices",
+  title: "Trader Or Not",
+  description: "Higher and lower game app with cryptocurrency prices",
 };
 
 export default function RootLayout({
