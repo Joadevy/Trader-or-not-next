@@ -1,13 +1,33 @@
+import { useEffect } from "react";
+
 import BackButton from "../Buttons/BackButton";
 
 type Props = {
   score: number;
   handleBackToHome: () => void;
+  animate: boolean;
+  setAnimate: (_: boolean) => void;
 };
 
-const GameLoader = ({ score, handleBackToHome }: Props) => {
+const GameLoader = ({
+  score,
+  handleBackToHome,
+  animate,
+  setAnimate,
+}: Props) => {
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimate(false);
+    }, 1000);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className="animate-fade-in text-dark-text border bg-dark-bg border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center ">
+    <div
+      className={
+        "text-dark-text border bg-dark-bg border-dark-blue-100 p-4 rounded-lg h-[550px] w-full lg:w-[450px] flex flex-col items-center " +
+        (animate ? "animate-fade-in" : "")
+      }
+    >
       <div className="flex justify-between w-full">
         <div>
           <BackButton

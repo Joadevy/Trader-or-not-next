@@ -38,13 +38,21 @@ const Game = ({ backToHome }: Props) => {
   const [optionChosen, setOptionChosen] = useState<TradeOptions>();
   const [result, setResult] = useState<TypeResult>();
   const [tradesInARow, setTradesInARow] = useState<TradeResult[]>([]);
+  const [showInitialAnimation, setShowInitialAnimation] = useState(true);
 
   useEffect(() => {
     getPrice(ticker.symbol).then((price) => setInitialPrice(price));
   }, [ticker]);
 
   if (!initialPrice)
-    return <GameLoader handleBackToHome={backToHome} score={score} />;
+    return (
+      <GameLoader
+        animate={showInitialAnimation}
+        handleBackToHome={backToHome}
+        score={score}
+        setAnimate={setShowInitialAnimation}
+      />
+    );
 
   const higherPriceSelected = async (isHigher: boolean) => {
     setIsActiveRound(true);
