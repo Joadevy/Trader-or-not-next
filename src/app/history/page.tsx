@@ -29,7 +29,7 @@ const splitStreakForStreakID = (
   return streaks;
 };
 
-export const splitStreakForGameID = (trades: StreakTradeResult[]) => {
+const splitStreakForGameID = (trades: StreakTradeResult[]) => {
   const streaks = new Map<StreakTradeResult["gameId"], StreakTradeResult[]>();
 
   trades.forEach((trade) => {

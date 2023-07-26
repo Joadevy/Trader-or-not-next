@@ -8,8 +8,6 @@ import type { CryptoTicker } from "@/components/Game/gameHelpers";
 
 import { useMemo } from "react";
 
-import { splitStreakForGameID } from "../history/page";
-
 import StatCardContainer from "./StatCard";
 import Loader from "./Loader";
 
@@ -61,7 +59,10 @@ const page = () => {
       : [];
   }
 
-  const winXtoken = new Map<CryptoTicker["name"], TradeResult[]>();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const winXtoken: Map<CryptoTicker["name"], TradeResult[]> = useMemo(() => {
+    return new Map<CryptoTicker["name"], TradeResult[]>();
+  }, []);
 
   historyTrades.forEach((trade) => {
     winXtoken.set(trade.ticker.name, [
@@ -79,7 +80,7 @@ const page = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const preferredPickInTokenWithMoreWins = useMemo(
     () => getPreferredPickForToken(tokenWithMoreWins, winXtoken),
-    [],
+    [winXtoken, tokenWithMoreWins],
   );
 
   //   const streaksPerGame = splitStreakForGameID(historyTrades);
