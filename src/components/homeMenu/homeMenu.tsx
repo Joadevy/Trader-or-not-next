@@ -56,7 +56,7 @@ const HomeMenu = () => {
       <HomeButton handleClick={() => handleStartPlay()} text="Start game" />
       <LinkButton linkTO={"/trophies"} text="My trophies" />
       <LinkButton linkTO={"/history"} text="Strake History" />
-      <HomeButton handleClick={() => {}} text="Statistics" />
+      <LinkButton linkTO={"/statistics"} text="My statistics" />
       <LinkButton linkTO={"/faq"} text="FAQ" />
     </div>
   );
