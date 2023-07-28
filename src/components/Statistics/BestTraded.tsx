@@ -37,7 +37,9 @@ const BestTraded = ({ winXtoken }: Props) => {
   return (
     <StatCardContainer>
       <div className=" text-dark-text">
-        <h2 className="font-bold text-dark-title text-2xl">Best traded</h2>
+        <h2 className="font-bold text-dark-title text-2xl">
+          Best asset traded
+        </h2>
         <p className="opacity-75 text-lg">
           Asset that you perform better during streaks
         </p>

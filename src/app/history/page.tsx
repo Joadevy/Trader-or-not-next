@@ -3,8 +3,6 @@
 import type { StreakTradeResult } from "@/components/Game/gameHelpers";
 
 // eslint-disable-next-line import/no-unresolved
-import Loader from "../statistics/Loader";
-
 import { splitStreakForGameID } from "@/utils/helpers";
 
 const page = () => {
@@ -19,9 +17,6 @@ const page = () => {
   }
 
   const streaksPerGame = splitStreakForGameID(historyTrades);
-
-  if (!tokenWithMoreWins || !preferredPickInTokenWithMoreWins)
-    return <Loader />;
 
   return (
     <main className="p-4">
@@ -61,7 +56,11 @@ const page = () => {
                               {trade.selection} price
                             </span>
                           </p>
-                          <p>{new Date(trade.date).toLocaleString()}</p>
+                          <p>
+                            {new Date(trade.date).toLocaleString(
+                              navigator.language ?? "es-AR",
+                            )}
+                          </p>
                         </div>
                       ))}
                     </div>
