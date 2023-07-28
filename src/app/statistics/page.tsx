@@ -10,12 +10,12 @@ import { useMemo } from "react";
 
 // eslint-disable-next-line import/no-unresolved
 import BestTraded from "@/components/Statistics/BestTraded";
-
 // eslint-disable-next-line import/no-unresolved
 import { splitStreakForGameID } from "@/utils/helpers";
-
 // eslint-disable-next-line import/no-unresolved
 import BestStreak from "@/components/Statistics/BestStreak";
+// eslint-disable-next-line import/no-unresolved
+import TrophiesGained from "@/components/Statistics/TrophiesGained";
 
 const page = () => {
   let historyTrades: StreakTradeResult[] = [];
@@ -49,6 +49,7 @@ const page = () => {
       <div className="flex gap-6 flex-wrap">
         <BestTraded winXtoken={winXtoken} />
         <BestStreak streaks={streaksPerGame} />
+        <TrophiesGained />
       </div>
     </main>
   );
