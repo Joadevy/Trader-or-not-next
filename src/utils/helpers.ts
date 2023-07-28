@@ -1,4 +1,8 @@
-import type { StreakTradeResult } from "@/components/Game/gameHelpers";
+import type {
+  CryptoTicker,
+  StreakTradeResult,
+  TradeResult,
+} from "@/components/Game/gameHelpers";
 
 export const splitStreakForStreakID = (
   MapGameIdStreaks: Map<StreakTradeResult["gameId"], StreakTradeResult[]>,
@@ -37,4 +41,44 @@ export const splitStreakForGameID = (trades: StreakTradeResult[]) => {
   });
 
   return splitStreakForStreakID(streaks);
+};
+
+export const getTokenWithMoreWins = (
+  winXtoken: Map<CryptoTicker["name"], TradeResult[]>,
+) => {
+  let max = 0;
+  let token = "";
+
+  winXtoken.forEach((tokenTrades, tokenName) => {
+    if (tokenTrades.length > max) {
+      max = tokenTrades.length;
+      token = tokenName;
+    }
+  });
+
+  return token ?? "-";
+};
+
+export const getWinsForToken = (
+  token: CryptoTicker["name"],
+  winXtoken: Map<CryptoTicker["name"], TradeResult[]>,
+) => winXtoken.get(token)?.length ?? 0;
+
+export const getPreferredPickForToken = (
+  token: CryptoTicker["name"],
+  winXtoken: Map<CryptoTicker["name"], TradeResult[]>,
+) => {
+  const higher = winXtoken
+    .get(token)
+    ?.filter((trade) => (trade.selection = "higher"));
+  const lower = winXtoken
+    .get(token)
+    ?.filter((trade) => (trade.selection = "lower"));
+
+  if (higher?.length == 0 && lower?.length == 0)
+    return { option: "-", amount: 0 };
+
+  return higher?.length! > lower?.length!
+    ? { option: "higher", amount: higher?.length }
+    : { option: "lower", amount: lower?.length };
 };
