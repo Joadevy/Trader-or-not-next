@@ -58,10 +58,9 @@ const getBestStreak = (
 };
 
 const BestStreak = ({ streaks }: Props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const bestStreak = useMemo(() => getBestStreak(streaks), [streaks]);
 
-  if (bestStreak.length === 0 || !bestStreak) return <Loader />;
+  if (!bestStreak) return <Loader />;
 
   return (
     <StatCardContainer>
