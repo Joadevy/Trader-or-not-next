@@ -1,17 +1,20 @@
 import type { StreakTradeResult } from "../Game/gameHelpers";
 
-import { useMemo } from "react";
+// eslint-disable-next-line import/no-unresolved
+import { useEffect, useState } from "react";
 
 // eslint-disable-next-line import/no-unresolved
 import Loader from "@/app/statistics/Loader";
 // eslint-disable-next-line import/no-unresolved
 import StatCardContainer from "@/app/statistics/StatCard";
 
+type Streak = Map<
+  StreakTradeResult["gameId"],
+  Map<StreakTradeResult["streakId"], StreakTradeResult[]>
+>;
+
 type Props = {
-  streaks: Map<
-    StreakTradeResult["gameId"],
-    Map<StreakTradeResult["streakId"], StreakTradeResult[]>
-  >;
+  streaks: Streak;
 };
 
 const getBestAssetInStreak = (streak: StreakTradeResult[]) => {
@@ -36,12 +39,7 @@ const getBestAssetInStreak = (streak: StreakTradeResult[]) => {
   return maxToken;
 };
 
-const getBestStreak = (
-  streaks: Map<
-    StreakTradeResult["gameId"],
-    Map<StreakTradeResult["streakId"], StreakTradeResult[]>
-  >,
-) => {
+const getBestStreak = (streaks: Streak) => {
   let tradesInBestStreak = 0;
   let bestStreak: StreakTradeResult[] = [];
 
@@ -58,7 +56,19 @@ const getBestStreak = (
 };
 
 const BestStreak = ({ streaks }: Props) => {
-  const bestStreak = useMemo(() => getBestStreak(streaks), [streaks]);
+  const [bestStreak, setBestStreak] = useState<StreakTradeResult[] | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const fetchData = () => {
+      const result = getBestStreak(streaks);
+
+      setBestStreak(result);
+    };
+
+    fetchData();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!bestStreak) return <Loader />;
 
