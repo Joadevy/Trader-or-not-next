@@ -8,11 +8,14 @@ import type { CryptoTicker } from "@/components/Game/gameHelpers";
 
 import { useMemo } from "react";
 
-import // eslint-disable-next-line import/no-unresolved
-"@/utils/helpers";
-
 // eslint-disable-next-line import/no-unresolved
 import BestTraded from "@/components/Statistics/BestTraded";
+
+// eslint-disable-next-line import/no-unresolved
+import { splitStreakForGameID } from "@/utils/helpers";
+
+// eslint-disable-next-line import/no-unresolved
+import BestStreak from "@/components/Statistics/BestStreak";
 
 const page = () => {
   let historyTrades: StreakTradeResult[] = [];
@@ -37,13 +40,16 @@ const page = () => {
     ]);
   });
 
-  // const streaksPerGame = splitStreakForGameID(historyTrades);
+  const streaksPerGame = splitStreakForGameID(historyTrades);
 
   return (
     <main className="p-4">
       <h1 className=" text-dark-title text-2xl mb-6">Game statistics</h1>
 
-      <BestTraded winXtoken={winXtoken} />
+      <div className="flex gap-6 flex-wrap">
+        <BestTraded winXtoken={winXtoken} />
+        <BestStreak streaks={streaksPerGame} />
+      </div>
     </main>
   );
 };
