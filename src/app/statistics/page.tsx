@@ -44,9 +44,11 @@ const page = () => {
 
   return (
     <main className="p-4">
-      <h1 className=" text-dark-title text-2xl mb-6">Game statistics</h1>
+      <h1 className=" text-dark-title text-2xl mb-6 text-center lg:text-left">
+        Game statistics
+      </h1>
 
-      <div className="flex gap-6 flex-wrap">
+      <div className="flex gap-6 flex-wrap items-center lg:items-stretch justify-center lg:justify-normal">
         <BestTraded winXtoken={winXtoken} />
         <BestStreak streaks={streaksPerGame} />
         <TrophiesGained />
