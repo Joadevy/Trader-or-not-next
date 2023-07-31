@@ -1,11 +1,21 @@
 "use client";
 
-import type { StreakTradeResult } from "@/components/Game/gameHelpers";
+import type {
+  StreakTradeResult,
+  TradeResult,
+} from "@/components/Game/gameHelpers";
+
+import { useEffect, useMemo, useState } from "react";
+
+// eslint-disable-next-line import/no-unresolved
+import Loading from "./loading";
 
 // eslint-disable-next-line import/no-unresolved
 import { splitStreakForGameID } from "@/utils/helpers";
+// eslint-disable-next-line import/no-unresolved
+import NormalButton from "@/components/Buttons/NormalButton";
 
-const page = () => {
+const getStreaksForGameID = () => {
   let historyTrades: StreakTradeResult[] = [];
 
   if (typeof window !== "undefined") {
@@ -16,20 +26,35 @@ const page = () => {
       : [];
   }
 
-  const streaksPerGame = splitStreakForGameID(historyTrades);
+  return splitStreakForGameID(historyTrades);
+};
+
+const Page = () => {
+  const [gamesID, setGamesID] = useState<TradeResult["gameId"][]>([]);
+  const [gamesPerPage, setGamesPerPage] = useState(5);
+
+  const streaksPerGame = useMemo(getStreaksForGameID, []);
+
+  useEffect(() => {
+    const gameIds = Array.from(streaksPerGame.keys()).reverse();
+
+    setGamesID(gameIds);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (gamesID.length === 0) return <Loading />;
 
   return (
     <main className="p-4">
       <h1 className=" text-dark-title text-2xl mb-4 lg:mb-2">
         Successful streak of trades
       </h1>
-      <div className=" text-dark-text flex gap-6 flex-wrap items-center ">
-        {Array.from(streaksPerGame.keys()).map((gameID, index) => (
+      <div className=" text-dark-text flex gap-6 flex-wrap items-center mb-4">
+        {gamesID.slice(0, gamesPerPage).map((gameID, index) => (
           <div
             key={gameID}
-            className="p-2 border border-dark-blue rounded-md shadow-[0_0_15px_#0B2447] w-full sm:w-fit"
+            className="p-2 border border-dark-blue rounded-md shadow-[0_0_15px_#0B2447] w-full sm:w-fit animate-fade-in"
           >
-            <h2 className="font-bold">Game {index + 1}</h2>
+            <h2 className="font-bold">Game {gamesID.length - index}</h2>
             <div className="flex flex-col gap-4 lg:flex-row">
               {Array.from(streaksPerGame.get(gameID)!.values()).map(
                 (streak, index) => (
@@ -71,8 +96,21 @@ const page = () => {
           </div>
         ))}
       </div>
+
+      {gamesID.slice(0, gamesPerPage).length < gamesID.length && (
+        <NormalButton
+          handleClick={() => setGamesPerPage(gamesPerPage + 5)}
+          text="Show more"
+        />
+      )}
+
+      {gamesID.length === 0 && (
+        <p className="text-dark-text text-center mt-4">
+          You haven&apos;t a streak yet, keep playing!
+        </p>
+      )}
     </main>
   );
 };
 
-export default page;
+export default Page;
