@@ -3,7 +3,7 @@ import FAQCard from "./FAQCard";
 const page = () => {
   return (
     <main className="p-4 text-dark-text">
-      <h1 className="text-dark-title text-2xl mb-4">
+      <h1 className="text-dark-title text-2xl mb-4 text-center lg:text-left">
         Frequently Asked Questions
       </h1>
       <div className="flex flex-wrap gap-8 items-center justify-center lg:items-stretch lg:justify-normal">
