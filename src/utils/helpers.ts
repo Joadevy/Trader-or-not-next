@@ -56,7 +56,7 @@ export const getTokenWithMoreWins = (
     }
   });
 
-  return token ?? "-";
+  return token === "" ? "-" : token;
 };
 
 export const getWinsForToken = (
