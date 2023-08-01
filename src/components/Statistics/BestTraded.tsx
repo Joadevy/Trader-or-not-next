@@ -1,6 +1,6 @@
 import type { CryptoTicker, TradeResult } from "../Game/gameHelpers";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   getPreferredPickForToken,
@@ -18,21 +18,31 @@ type Props = {
   winXtoken: Map<CryptoTicker["name"], TradeResult[]>;
 };
 
+type PreferredPick = {
+  option: string;
+  amount?: number;
+};
+
 const BestTraded = ({ winXtoken }: Props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [isLoading, setIsLoading] = useState(true);
+
   const tokenWithMoreWins = useMemo(
     () => String(getTokenWithMoreWins(winXtoken)),
     [winXtoken],
   );
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const preferredPickInTokenWithMoreWins = useMemo(
     () => getPreferredPickForToken(tokenWithMoreWins, winXtoken),
     [winXtoken, tokenWithMoreWins],
   );
 
-  if (!tokenWithMoreWins || !preferredPickInTokenWithMoreWins)
-    return <Loader />;
+  useEffect(() => {
+    if (tokenWithMoreWins && preferredPickInTokenWithMoreWins) {
+      setIsLoading(false);
+    }
+  }, [tokenWithMoreWins, preferredPickInTokenWithMoreWins]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <StatCardContainer>
