@@ -30,7 +30,7 @@ const getStreaksForGameID = () => {
 };
 
 const Page = () => {
-  const [gamesID, setGamesID] = useState<TradeResult["gameId"][]>([]);
+  const [gamesID, setGamesID] = useState<TradeResult["gameId"][] | null>(null);
   const [gamesPerPage, setGamesPerPage] = useState(5);
 
   const streaksPerGame = useMemo(getStreaksForGameID, []);
@@ -41,7 +41,7 @@ const Page = () => {
     setGamesID(gameIds);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (gamesID.length === 0) return <Loading />;
+  if (!gamesID) return <Loading />;
 
   return (
     <main className="p-4">
@@ -105,7 +105,7 @@ const Page = () => {
       )}
 
       {gamesID.length === 0 && (
-        <p className="text-dark-text text-center mt-4">
+        <p className="text-dark-text opacity-75 text-center mt-4">
           You haven&apos;t a streak yet, keep playing!
         </p>
       )}
