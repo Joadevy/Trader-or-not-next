@@ -28,6 +28,11 @@ const page = () => {
         />
 
         <FAQCard
+          description="It represents a continuous sequence of positive outcomes without any intervening opposite results."
+          title="What is a streak of trades?"
+        />
+
+        <FAQCard
           description="Due to its highly volatile nature and the market's continuous 24/7 operation, the cryptocurrency experiences frequent price fluctuations."
           title="Why does the price change every 5 seconds?"
         />
