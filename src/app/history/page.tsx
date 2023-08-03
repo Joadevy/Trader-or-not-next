@@ -14,6 +14,8 @@ import Loading from "./loading";
 import { splitStreakForGameID } from "@/utils/helpers";
 // eslint-disable-next-line import/no-unresolved
 import NormalButton from "@/components/Buttons/NormalButton";
+// eslint-disable-next-line import/no-unresolved
+import NormalLink from "@/components/Buttons/NormalLink";
 
 const getStreaksForGameID = () => {
   let historyTrades: StreakTradeResult[] = [];
@@ -105,9 +107,12 @@ const Page = () => {
       )}
 
       {gamesID.length === 0 && (
-        <p className="text-dark-text opacity-75 text-center mt-4">
-          You haven&apos;t a streak yet, keep playing!
-        </p>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-dark-text opacity-75 text-center mt-4">
+            You haven&apos;t a streak yet, keep playing!
+          </p>
+          <NormalLink linkTO="/" text="Back home" />
+        </div>
       )}
     </main>
   );
