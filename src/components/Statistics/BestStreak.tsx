@@ -36,7 +36,7 @@ const getBestAssetInStreak = (streak: StreakTradeResult[]) => {
     }
   });
 
-  return maxToken;
+  return maxToken === "" ? "-" : maxToken;
 };
 
 const getBestStreak = (streaks: Streak) => {
@@ -100,7 +100,7 @@ const BestStreak = ({ streaks }: Props) => {
                       day: "numeric",
                     },
                   )
-                : ""}
+                : "-"}
             </span>
           </p>
 
