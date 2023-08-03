@@ -26,7 +26,7 @@ const TrophiesEarned = () => {
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.getItem("trophies")
         ? setTrophiesEarned(JSON.parse(localStorage.getItem("trophies")!) ?? [])
-        : [];
+        : setTrophiesEarned([]);
     }
   }, []);
 
@@ -65,15 +65,19 @@ const TrophiesEarned = () => {
 
           <p>
             <span className="opacity-75">Date of last won: </span>
-            <span>
-              {new Date(
-                getLastTrophieEarned(trophiesEarned).date,
-              ).toLocaleString(navigator.language ?? "es-AR", {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-              })}
-            </span>
+            {getLastTrophieEarned(trophiesEarned) ? (
+              <span>
+                {new Date(
+                  getLastTrophieEarned(trophiesEarned).date,
+                ).toLocaleString(navigator.language ?? "es-AR", {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                })}
+              </span>
+            ) : (
+              "-"
+            )}
           </p>
         </div>
       </div>
