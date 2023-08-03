@@ -68,6 +68,8 @@ export const getPreferredPickForToken = (
   token: CryptoTicker["name"],
   winXtoken: Map<CryptoTicker["name"], TradeResult[]>,
 ) => {
+  if (token === "-" || !token) return { option: "-", amount: 0 };
+
   const higher = winXtoken
     .get(token)
     ?.filter((trade) => (trade.selection = "higher"));
