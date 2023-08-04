@@ -44,3 +44,17 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
+
+.Toastify__toast {
+  border: 1px solid #10141e;
+  border-radius: 8px;
+  background-color: #1a202c !important;
+}
+
+.Toastify__toast-body {
+  background-color: #1a202c;
+}
+
+.Toastify__progress-bar {
+  background-color: #19376d !important;
+}
