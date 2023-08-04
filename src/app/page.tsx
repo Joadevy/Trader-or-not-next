@@ -1,6 +1,3 @@
-"use client";
-// eslint-disable-next-line import/no-unresolved
-import PrizeToast from "@/components/Game/Trophies/PrizeToast";
 // eslint-disable-next-line import/no-unresolved
 import HomeMenu from "@/components/homeMenu";
 
@@ -18,8 +15,6 @@ export default function Home() {
           </p>
         </header>
         <HomeMenu />
-
-        <PrizeToast score={5} />
       </main>
     </div>
   );
