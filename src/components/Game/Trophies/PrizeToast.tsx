@@ -8,17 +8,17 @@ const PrizeToast = ({ score }: Props) => {
   return (
     <>
       {score === 1 ? (
-        <BottomRightToast message="You got 1 predict and won the Rookie Trader Trophy!" />
+        <BottomRightToast message="Boom! 1 prediction, 1 Rookie Trader Trophy claimed!" />
       ) : score === 2 ? (
-        <BottomRightToast message="You got 2 predicts in a row and won the Beginner Trader Trophy!" />
+        <BottomRightToast message="Binary brilliance! 2 perfect predictions, Beginner Trader Trophy in the bag!" />
       ) : score === 5 ? (
-        <BottomRightToast message="You got 5 predicts in a row and won the Advanced Trader Trophy!" />
+        <BottomRightToast message="High five! 5 predictions in a row, Advanced Trader Trophy earned!" />
       ) : score === 7 ? (
-        <BottomRightToast message="You got 7 predicts in a row and won the Specialist Trader Trophy!" />
+        <BottomRightToast message="Heptapredicted! 7 perfect calls, Specialist Trader Trophy unlocked!" />
       ) : score === 10 ? (
-        <BottomRightToast message="You got 10 predicts in a row and won the Professional Trader Trophy!" />
+        <BottomRightToast message="Perfect ten! 10 consecutive predictions nailed, Professional Trader Trophy claimed!" />
       ) : score === 12 ? (
-        <BottomRightToast message="You got 12 predicts in a row and won the Master Trader Trophy!" />
+        <BottomRightToast message="Booyah! 12 flawless predictions, Master Trader Trophy conquered!" />
       ) : null}
     </>
   );
