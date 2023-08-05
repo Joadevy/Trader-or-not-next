@@ -1,4 +1,6 @@
-**TRADER OR NOT**
+**📉 TRADER OR NOT 📈**
+
+![](https://res.cloudinary.com/dkjkgri6x/image/upload/v1691264194/Screenshot_from_2023-08-05_16-29-17_ktadc6.png)
 
 ## Live site 🚀
 - Live Site URL: https://trader-or-not-next.vercel.app/
