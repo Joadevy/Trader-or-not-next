@@ -36,9 +36,3 @@ Basically it's a reversion of an [old project](https://github.com/Joadevy/Trader
 
 - Twitter - [@JoaquinArlettaz](https://twitter.com/JoaquinArlettaz)
 - LinkedIn - [@joaquin-arlettaz](https://www.linkedin.com/in/joaqu%C3%ADn-arlettaz/)
-
-## Got feedback or any comment for me?
-
-- I really appreciate any comment to improve myself and grow in the tech-world. If you have any ideas or just want to talk to me feel free to contact me on Twitter / LinkedIn and I'll get back to you as fast as I can.  
-
-**Have a good day!** 🚀
